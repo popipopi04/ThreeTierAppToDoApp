@@ -1,65 +1,16 @@
-resource "aws_instance" "my_instance" {
-  count = length(var.instance_names)
-
-
-  ami                    = var.ami_id # Specify the AMI ID for your desired Amazon Machine Image
-  instance_type          = var.instance_type
-  key_name               = "devops" # Change this to your key pair name
-  vpc_security_group_ids = [aws_security_group.terraform-instance-sg.id]
-  // iam_instance_profile = iam_instance_profile.my-profile.name
-
-  iam_instance_profile = aws_iam_instance_profile.example_profile.name
-  //for storage
+resource "aws_instance" "ec2" {
+  ami                    = var.ami_id
+  instance_type          = "t2.large"
+  key_name               = var.key-name
+  subnet_id              = aws_subnet.public-subnet.id
+  vpc_security_group_ids = [aws_security_group.security-group.id]
+  iam_instance_profile   = aws_iam_instance_profile.instance-profile.name
   root_block_device {
     volume_size = 30
   }
+  #user_data = templatefile("./tools-install.sh", {})
 
   tags = {
-    Name = var.instance_names[count.index]
-  }
-
-
-}
-
-output "jenkins_public_ip" {
-  value = [for instance in aws_instance.my_instance : instance.public_ip]
-
-}
-/*
-resource "iam_instance_profile" "my-profile" {
-  role= iam_role.example.name
-  name="My profile"
-  
-}
-*/
-
-
-
-#Create security group 
-resource "aws_security_group" "terraform-instance-sg" {
-  name        = "terraform-created-sg"
-  description = "Allow inbound ports 22, 8080"
-  vpc_id      = var.vpc_id
-
-  ingress = [
-    for port in [22, 80, 443, 8080,3000] : {
-      description      = "inbound rules"
-      from_port        = port
-      to_port          = port
-      protocol         = "tcp"
-      cidr_blocks      = ["0.0.0.0/0"]
-      ipv6_cidr_blocks = []
-      prefix_list_ids  = []
-      security_groups  = []
-      self             = false
-    }
-  ]
-
-  #Allow all outbound requests
-  egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
+    Name = var.instance-name
   }
 }
