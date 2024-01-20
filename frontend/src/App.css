@@ -1,12 +1,11 @@
 .app {
-    display: flex;
     flex-direction: column;
     height: 100vh;
 }
 
 .app-header {
-    background-color: #282c34;
-    color: white;
+    background-color: #B8C2B4;
+    color: black;
     padding: 10px 20px;
     text-align: center;
     font-size: 1.5rem;
@@ -14,7 +13,6 @@
 
 .main-content {
     flex-grow: 1;
-    display: flex;
     justify-content: center;
     align-items: center;
     padding: 20px;
@@ -22,8 +20,11 @@
 
 .todo-container {
     width: 100%;
-    max-width: 600px;
+    height: 100vh;
+    /* max-width: 600px; */
     padding: 20px;
+    background-color: #f4f4f4;
+    /* margin-top: 50px; */
 }
 
 .task-form {
