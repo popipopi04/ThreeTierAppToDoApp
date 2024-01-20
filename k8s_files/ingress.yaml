@@ -10,7 +10,7 @@ metadata:
 spec:
   ingressClassName: alb
   rules:
-    - host: backend.ajaycodelab.com
+    - host: www.ajaycodelab.com
       http:
         paths:
           - path: /api
