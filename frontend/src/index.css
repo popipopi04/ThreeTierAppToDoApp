@@ -8,12 +8,11 @@ body {
 }
 
 .app-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    padding: 20px;
-    background: linear-gradient(135deg, #6e8efb, #a777e3);
+
+    height: 100vh;
+    width: 100vw;
+   
+   /* background: linear-gradient(135deg, #6e8efb, #a777e3, #87e3fa);*/
 }
 
 /* Optional: Add some more global styles for typography */
